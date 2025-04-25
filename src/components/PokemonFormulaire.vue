@@ -1,6 +1,8 @@
 <script setup>
 
 import {ref} from "vue";
+import PokemonService from "../service/PokemonService.js";
+import router from "../router/Router.js";
 
 const pokemon = ref({
   name: '',
@@ -10,16 +12,26 @@ const pokemon = ref({
   types: []
 })
 
-const types = ref('')
+const typePokemon = ref('')
 
-function addPokemon() {
-  console.log(pokemon.value.name)
-  console.log(pokemon.value.hp)
-  console.log(pokemon.value.cp)
-  console.log(pokemon.value.picture)
-  console.log(types.value)
+function addPokemon()
+{
+    try {
+      mapTypes();
+      PokemonService.addPokemon(pokemon.value);
+      window.alert("Pokémon ajouté avec succés");
+      router.push({ path: '/pokemons'});
+    }
+    catch (e) {
+      window.alert("Une erreur est survenue");
+    }
+
 }
 
+function mapTypes() {
+  pokemon.value.types = typePokemon.value.split(',')
+      .map(type => type.trim());
+}
 </script>
 
 <template>
@@ -53,7 +65,7 @@ function addPokemon() {
 
       <div class="form-group mb-3">
         <div class="mat-input-field">
-          <input  v-model="types"  type="text" class="mat-text" id="types" required>
+          <input  v-model="typePokemon"  type="text" class="mat-text" id="types" required>
           <label class="mat-label" for="types">Types (séparés par une virgule)</label>
         </div>
       </div>

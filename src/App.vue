@@ -4,7 +4,11 @@
 </script>
 
 <template>
-  <NavBar/>
-  <router-view />
-  <FooterComponent/>
+  <div>
+    <NavBar/>
+    <router-view />
+    <div class="">
+      <FooterComponent/>
+    </div>
+  </div>
 </template>
