@@ -71,6 +71,7 @@ function mapTypes() {
       </div>
 
       <button type="submit" class="btn btn-success">Ajouter</button>
+      <router-link class="btn btn-dark ml-3" :to="`/pokemons`">retour</router-link>
     </form>
   </div>
 </template>

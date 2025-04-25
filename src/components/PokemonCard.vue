@@ -11,12 +11,10 @@ defineProps({
 let isActive = ref(false)
 
 function handleMouseEnter() {
-  console.log('enter ');
   isActive.value = true;
 }
 
 function handleMouseLeave() {
-  console.log("leave")
   isActive.value = false;
 }
 

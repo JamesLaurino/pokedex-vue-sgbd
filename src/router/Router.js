@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import PokemonList from "../pages/PokemonList.vue";
 import PokemonDetails from "../pages/PokemonDetails.vue";
 import PokemonAdd from "../pages/PokemonAdd.vue";
+import PokemonEdit from "../components/PokemonEdit.vue";
 
 const routes = [
     {
@@ -20,6 +21,10 @@ const routes = [
     {
         path: '/pokemon/add',
         component: PokemonAdd
+    },
+    {
+        path: '/pokemon/:id/edit',
+        component: PokemonEdit
     }
 ]
 

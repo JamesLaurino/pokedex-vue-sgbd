@@ -33,7 +33,8 @@ onMounted(() => {
              <p class="mr-3" v-for="(type,index) in pokemon.types" :key="index">{{type}}</p>
            </div>
          <div>
-           <router-link class="text-dark h4" :to="`/pokemons`">Retour</router-link>
+           <router-link class="btn btn-dark mr-2" :to="`/pokemons`">Retour</router-link>
+           <router-link class="btn btn-dark" :to="`/pokemon/${pokemon.id}/edit`">Editer</router-link>
          </div>
       </div>
   </div>
