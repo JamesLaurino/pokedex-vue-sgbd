@@ -1,8 +1,8 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import PokemonCard from "./PokemonCard.vue";
+import PokemonCard from "../components/PokemonCard.vue";
 import PokemonService from "../service/PokemonService.js";
-import SearchBar from "./SearchBar.vue";
+import SearchBar from "../components/SearchBar.vue";
 
 const pokemonList = ref([]);
 
