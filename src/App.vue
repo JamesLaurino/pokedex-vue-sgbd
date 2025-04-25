@@ -4,11 +4,13 @@
 </script>
 
 <template>
-  <div>
-    <NavBar/>
-    <router-view />
-    <div class="">
-      <FooterComponent/>
-    </div>
+  <div class="d-flex flex-column min-vh-100">
+    <NavBar />
+
+    <main class="flex-grow-1">
+      <router-view />
+    </main>
+
+    <FooterComponent />
   </div>
 </template>
