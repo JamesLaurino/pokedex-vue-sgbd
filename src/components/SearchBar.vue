@@ -15,8 +15,9 @@
     </div>
     <div class="row justify-content-center mt-4">
       <div class="col-1 text-left">
-        <div>
-          <button class="btn btn-dark">submit</button>
+        <div class="container d-flex justify-content-center">
+          <button class="btn btn-dark mr-3">submit</button>
+          <router-link class="btn btn-dark mr-2" :to="`/pokemon/add`">Ajouter</router-link>
         </div>
       </div>
     </div>

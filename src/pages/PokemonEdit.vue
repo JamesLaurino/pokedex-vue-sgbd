@@ -1,5 +1,5 @@
 <script setup>
-import PokemonEdit from "../components/PokemonEdit.vue";
+  import PokemonEdit from "../components/PokemonEdit.vue";
 </script>
 
 <template>
