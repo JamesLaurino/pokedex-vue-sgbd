@@ -6,6 +6,14 @@ export default class PokemonService {
             .catch(error => this.handleError(error));
     }
 
+    static getPokemonById(id) {
+        return fetch(`http://localhost:3001/pokemons/${id}`)
+            .then(response => response.json())
+            .then(data => data)
+            .catch(error => this.handleError(error));
+    }
+
+
     static isEmpty(Object) {
         return Object.keys(data).length === 0;
     }

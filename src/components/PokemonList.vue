@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue';
 import PokemonCard from "./PokemonCard.vue";
 import PokemonService from "../service/PokemonService.js";
+import SearchBar from "./SearchBar.vue";
 
 const pokemonList = ref([]);
 
@@ -13,7 +14,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container my-4">
+    <SearchBar/>
+  <div class="container my-4 mt-5">
     <div class="row">
         <PokemonCard :pokemonList="pokemonList"/>
     </div>
