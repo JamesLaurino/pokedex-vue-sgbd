@@ -128,12 +128,12 @@
   "client": [
     {
       "id": "1",
-      "name": "james@mail.com",
+      "name": "admin",
       "password": "1234"
     },
     {
       "id": "2",
-      "name": "thomas@mail.com",
+      "name": "user",
       "password": "1234"
     }
   ]

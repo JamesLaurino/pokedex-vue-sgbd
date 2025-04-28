@@ -21,11 +21,11 @@ function handleMouseLeave() {
 </script>
 
 <template>
-  <div id="card" :class="{'card-hover': isActive}" class="col-md-4 mb-4" v-for="pokemon in pokemonList" :key="pokemon.id"
+  <div style="max-width: 350px" id="card" :class="{'card-hover': isActive}" class="col-md-4 mb-4 shadow mr-3" v-for="pokemon in pokemonList" :key="pokemon.id"
        @mouseover="handleMouseEnter"
        @mouseleave="handleMouseLeave">
     <div class="container d-flex justify-content-center">
-      <p class="h4">{{pokemon.name}}</p>
+      <p class="h4 mt-2">{{pokemon.name}}</p>
     </div>
     <div class="container d-flex justify-content-center">
       <router-link class="text-dark h5" :to="`/pokemon/${pokemon.id}/show`">

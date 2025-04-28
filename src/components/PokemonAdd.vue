@@ -2,7 +2,8 @@
 
 import {ref} from "vue";
 import PokemonService from "../service/PokemonService.js";
-import router from "../router/Router.js";
+import {useRouter} from "vue-router";
+
 
 const pokemon = ref({
   name: '',
@@ -11,6 +12,8 @@ const pokemon = ref({
   picture: '',
   types: []
 })
+
+const router = useRouter();
 
 const typePokemon = ref('')
 
@@ -38,13 +41,13 @@ function mapTypes() {
   <div class="container d-flex justify-content-center">
     <form @submit.prevent="addPokemon">
       <div class="form-group row mb-3">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="mat-input-field">
             <input  v-model="pokemon.name" type="text" class="mat-text" id="name" required>
             <label class="mat-label" for="name">Pokémon name</label>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="mat-input-field">
             <input  v-model="pokemon.picture" type="text" class="mat-text" id="picture" required>
             <label class="mat-label" for="picture">Picture</label>

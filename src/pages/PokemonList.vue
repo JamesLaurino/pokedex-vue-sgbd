@@ -19,21 +19,5 @@ onMounted(() => {
     <div class="row">
         <PokemonCard :pokemonList="pokemonList"/>
     </div>
-<!--    <router-link class="btn btn-danger rounded-circle shadow floating-button" :to="`/pokemon/add`">+</router-link>-->
   </div>
 </template>
-
-<!--<style>-->
-<!--.floating-button {-->
-<!--  position: fixed;-->
-<!--  bottom: 120px;-->
-<!--  right: 200px;-->
-<!--  width: 50px;-->
-<!--  height: 50px;-->
-<!--  font-size: 30px;-->
-<!--  display: flex;-->
-<!--  align-items: center;-->
-<!--  justify-content: center;-->
-<!--  z-index: 999;-->
-<!--}-->
-<!--</style>-->
