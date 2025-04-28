@@ -7,11 +7,15 @@ const pokemonName = ref("")
 
 watch(pokemonName, (newVal,oldValue) =>
 {
-  searchPokemon(newVal);
+  if(newVal.length > 1) {
+    console.log(newVal)
+    searchPokemon(newVal);
+  } else {
+    pokemonList.value = [];
+  }
 })
 
 function searchPokemon(pokemonName) {
-  console.log(pokemonName)
   PokemonService.searchPokemon(pokemonName)
       .then(datas => {pokemonList.value = datas});
 }
@@ -27,6 +31,9 @@ function searchPokemon(pokemonName) {
             <input type="text" v-model="pokemonName" class="mat-text" id="name" required>
             <label class="mat-label" for="name">Pokémon</label>
           </div>
+        </div>
+        <div class="mt-4">
+          <router-link class="btn btn-danger rounded-circle shadow floating-button" :to="`/pokemon/add`">+</router-link>
         </div>
       </div>
       <div class="row justify-content-center">
