@@ -124,5 +124,17 @@
         "Feu"
       ]
     }
+  ],
+  "client": [
+    {
+      "id": "1",
+      "name": "james@mail.com",
+      "password": "1234"
+    },
+    {
+      "id": "2",
+      "name": "thomas@mail.com",
+      "password": "1234"
+    }
   ]
 }
