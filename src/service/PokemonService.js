@@ -24,6 +24,14 @@ export default class PokemonService {
             .catch(error => this.handleError(error));
     }
 
+    static searchPokemon(term) {
+
+        return fetch(`http://localhost:3001/pokemons?name_like=${term}`)
+            .then(response => response.json())
+            .catch(error => this.handleError(error));
+
+    }
+
 
     static isEmpty(Object) {
         return Object.keys(data).length === 0;

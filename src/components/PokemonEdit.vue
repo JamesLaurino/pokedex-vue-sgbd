@@ -8,7 +8,6 @@ const pokemonId = route.params.id;
 const pokemon = ref(null);
 
 onMounted(() => {
-  console.log(pokemonId)
   PokemonService.getPokemonById(pokemonId)
       .then(data => {pokemon.value = data});
 });

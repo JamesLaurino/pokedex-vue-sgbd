@@ -1,22 +1,42 @@
 <script setup>
+import {ref, watch} from "vue";
+import PokemonService from "../service/PokemonService.js";
+
+const pokemonList = ref([]);
+const pokemonName = ref("")
+
+watch(pokemonName, (newVal,oldValue) =>
+{
+  searchPokemon(newVal);
+})
+
+function searchPokemon(pokemonName) {
+  console.log(pokemonName)
+  PokemonService.searchPokemon(pokemonName)
+      .then(datas => {pokemonList.value = datas});
+}
+
 
 </script>
 
 <template>
   <div class="container mt-3">
-    <div class="row justify-content-center">
-      <div class="col-3 text-center">
-        <div class="mat-input-field">
-          <input type="text" class="mat-text" id="name" required>
-          <label class="mat-label" for="name">Pokémon</label>
+      <div class="row justify-content-center">
+        <div class="col-3 text-center">
+          <div class="mat-input-field">
+            <input type="text" v-model="pokemonName" class="mat-text" id="name" required>
+            <label class="mat-label" for="name">Pokémon</label>
+          </div>
         </div>
       </div>
-    </div>
-    </div>
-    <div class="row justify-content-center mt-4">
-      <div class="col-1 text-left">
-        <div class="container d-flex justify-content-center">
-          <button class="btn btn-dark mr-3">submit</button>
+      <div class="row justify-content-center">
+        <div class="col-3 text-center" v-if="pokemonList.length > 0">
+          <ul class="list-group list-group-flush">
+            <router-link class="list-group-item text-dark h5" v-for="(pokemonItem,index) in pokemonList" :key="index"
+                         :to="`/pokemon/${pokemonItem.id}/show`">
+              {{pokemonItem.name}}
+            </router-link>
+          </ul>
         </div>
       </div>
     </div>

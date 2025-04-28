@@ -26,7 +26,7 @@ onMounted(() => {
 <style>
 .floating-button {
   position: fixed;
-  bottom: 70px;
+  bottom: 120px;
   right: 200px;
   width: 50px;
   height: 50px;
