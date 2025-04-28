@@ -1,6 +1,6 @@
 <script setup>
 
-import {ref} from "vue";
+import {ref, watch} from "vue";
 import PokemonService from "../service/PokemonService.js";
 import {useRouter} from "vue-router";
 
@@ -13,6 +13,16 @@ const pokemon = ref({
   types: []
 })
 
+const urlPattern = /^https:\/\/assets\.pokemon\.com\/assets\/cms2\/img\/pokedex\/detail\/[0-9]{3}\.png$/;
+
+const error = ref({
+  "name":false,
+  "picture":false,
+  "cp":false,
+  "hp":false,
+  "type":false
+})
+
 const router = useRouter();
 
 const typePokemon = ref('')
@@ -20,20 +30,55 @@ const typePokemon = ref('')
 function addPokemon()
 {
     try {
+
       mapTypes();
-      PokemonService.addPokemon(pokemon.value);
-      window.alert("Pokémon ajouté avec succés");
-      router.push({ path: '/pokemons'});
+      checkName();
+      checkPicture();
+      checkCP();
+      checkHP();
+
+      const hasError = Object.values(error.value).some(val => val === true);
+      if(hasError) {
+        window.alert("Une erreur est survenues");
+      }
+      else {
+        PokemonService.addPokemon(pokemon.value);
+        window.alert("Pokémon ajouté avec succés");
+        router.push({ path: '/pokemons'});
+      }
     }
     catch (e) {
       window.alert("Une erreur est survenue");
     }
-
 }
 
+function checkName() {
+  if(pokemon.value.name.length <= 2) {
+    error.value.name = true;
+  }
+}
+function checkHP() {
+  if(pokemon.value.hp <= 0) {
+    error.value.hp = true;
+  }
+}
+function checkCP() {
+  if(pokemon.value.cp <= 0) {
+    error.value.cp = true;
+  }
+}
+function checkPicture() {
+  if(!urlPattern.test(pokemon.value.picture)) {
+    error.value.picture = true;
+  }
+}
 function mapTypes() {
-  pokemon.value.types = typePokemon.value.split(',')
-      .map(type => type.trim());
+  try {
+    pokemon.value.types = typePokemon.value.split(',')
+        .map(type => type.trim());
+  }catch (e) {
+    error.value.type = true;
+  }
 }
 </script>
 
@@ -45,24 +90,30 @@ function mapTypes() {
           <div class="mat-input-field">
             <input  v-model="pokemon.name" type="text" class="mat-text" id="name" required>
             <label class="mat-label" for="name">Pokémon name</label>
+            <span v-if="error.name" class="error mt-1">La longueur du nom doit être supérieur à deux</span>
           </div>
         </div>
         <div class="col-md-12">
           <div class="mat-input-field">
-            <input  v-model="pokemon.picture" type="text" class="mat-text" id="picture" required>
+            <input  v-model="pokemon.picture" type="text"
+                    placeholder="https://assets.pokemon.com/assets/cms2/img/pokedex/detail/XXX.png"
+                    class="mat-text" id="picture" required>
             <label class="mat-label" for="picture">Picture</label>
+            <span v-if="error.picture" class="error mt-1">Le format n'est pas correct</span>
           </div>
         </div>
       </div>
 
       <div class="form-group row mb-3">
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label for="hp" class="form-label">HP</label>
           <input v-model.number="pokemon.hp" type="number" class="form-control" id="hp" required>
+          <span v-if="error.hp" class="error mt-1">Le HP doit être plus grand que zero</span>
         </div>
         <div class="col-md-6">
           <label for="cp" class="form-label">CP</label>
           <input v-model.number="pokemon.cp" type="number" class="form-control" id="cp" required>
+          <span v-if="error.cp" class="error mt-1">Le CP doit être plus grand que zero</span>
         </div>
       </div>
 
@@ -70,6 +121,7 @@ function mapTypes() {
         <div class="mat-input-field">
           <input  v-model="typePokemon"  type="text" class="mat-text" id="types" required>
           <label class="mat-label" for="types">Types (séparés par une virgule)</label>
+          <span v-if="error.type" class="error mt-1">Les types doit être au format : type1,type2</span>
         </div>
       </div>
 
@@ -81,6 +133,10 @@ function mapTypes() {
 
 <style>
 
+.error {
+  color: red;
+  font-size: 0.9em;
+}
 .mat-label {
   font-family: "system-ui", "Courier New", monospace;
 }
@@ -99,7 +155,7 @@ function mapTypes() {
 }
 .mat-input-field .mat-label {
   position: absolute;
-  top: 5px;
+  top: -8px;
   left: 0;
   font-size: 16px;
   color: #9e9e9e;
@@ -114,5 +170,8 @@ function mapTypes() {
   top: -15px;
   font-size: 12px;
   color: #26a69a;
+}
+input::placeholder {
+  font: 1rem/3 sans-serif;
 }
 </style>

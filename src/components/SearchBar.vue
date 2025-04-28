@@ -8,7 +8,6 @@ const pokemonName = ref("")
 watch(pokemonName, (newVal,oldValue) =>
 {
   if(newVal.length > 1) {
-    console.log(newVal)
     searchPokemon(newVal);
   } else {
     pokemonList.value = [];
