@@ -32,6 +32,19 @@ export default class PokemonService {
 
     }
 
+    static typesPokemon() {
+        return  [
+            "Feu",
+            "Eau",
+            "Plante",
+            "Poison",
+            "Insecte",
+            "Normal",
+            "Vol",
+            "Electrik",
+            "Fée"
+        ]
+    }
 
     static isEmpty(Object) {
         return Object.keys(data).length === 0;

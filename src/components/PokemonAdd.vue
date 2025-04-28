@@ -1,7 +1,8 @@
 <script setup>
 
-import {ref, watch} from "vue";
+import {ref} from "vue";
 import PokemonService from "../service/PokemonService.js";
+import TypeColorHelper from "../helpers/TypeColorHelper.js";
 import {useRouter} from "vue-router";
 
 
@@ -25,33 +26,28 @@ const error = ref({
 
 const router = useRouter();
 
-const typePokemon = ref('')
+const typePokemon = ref([])
 
-function addPokemon()
-{
-    try {
+function addPokemon() {
+    try
+    {
+        mapTypes()
+        checkName();
+        checkPicture();
+        checkCP();
+        checkHP();
 
-      mapTypes();
-      checkName();
-      checkPicture();
-      checkCP();
-      checkHP();
-
-      const hasError = Object.values(error.value).some(val => val === true);
-      if(hasError) {
-        window.alert("Une erreur est survenues");
-      }
-      else {
-        PokemonService.addPokemon(pokemon.value);
-        window.alert("Pokémon ajouté avec succés");
-        router.push({ path: '/pokemons'});
-      }
+        const hasError = Object.values(error.value).some(val => val === true);
+        if(!hasError) {
+          PokemonService.addPokemon(pokemon.value);
+          window.alert("Pokémon ajouté avec succés");
+          router.push({ path: '/pokemons'});
+        }
     }
-    catch (e) {
-      window.alert("Une erreur est survenue");
-    }
+      catch (e) {
+        window.alert("Une erreur est survenue");
+      }
 }
-
 function checkName() {
   if(pokemon.value.name.length <= 2) {
     error.value.name = true;
@@ -74,8 +70,14 @@ function checkPicture() {
 }
 function mapTypes() {
   try {
-    pokemon.value.types = typePokemon.value.split(',')
-        .map(type => type.trim());
+    if(typePokemon.value.length <= 2 && typePokemon.value.length > 0) {
+      typePokemon.value.forEach((e) => {
+        pokemon.value.types.push(e)
+      });
+    }
+    else {
+      error.value.type = true;
+    }
   }catch (e) {
     error.value.type = true;
   }
@@ -118,11 +120,11 @@ function mapTypes() {
       </div>
 
       <div class="form-group mb-3">
-        <div class="mat-input-field">
-          <input  v-model="typePokemon"  type="text" class="mat-text" id="types" required>
-          <label class="mat-label" for="types">Types (séparés par une virgule)</label>
-          <span v-if="error.type" class="error mt-1">Les types doit être au format : type1,type2</span>
-        </div>
+        <span v-for="(type,index) in PokemonService.typesPokemon()" :key="index">
+          <input type="checkbox" v-model="typePokemon" :id="index" :name="type" :value="type">
+          <label :for="index" class="p-1 mr-3 ml-2 rounded-circle p-1"
+                 :style="{ backgroundColor: TypeColorHelper(type) }">{{type}}</label>
+        </span>
       </div>
 
       <button type="submit" class="btn btn-success">Ajouter</button>

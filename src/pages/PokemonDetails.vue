@@ -2,6 +2,7 @@
 import { useRoute } from 'vue-router'
 import {onMounted, ref} from "vue";
 import PokemonService from "../service/PokemonService.js";
+import TypeColorHelper from "../helpers/TypeColorHelper.js";
 
 const route = useRoute();
 const pokemonId = route.params.id;
@@ -28,10 +29,12 @@ onMounted(() => {
           </div>
       </div>
       <div class="list-group">
-        <a class="list-group-item list-group-item-action list-group-item-secondary">HP : {{pokemon.hp}}</a>
-        <a class="list-group-item list-group-item-action">CP : {{pokemon.cp}}</a>
-        <a class="list-group-item list-group-item-action list-group-item-secondary">
-            TYPES : {{pokemon.types.join(" & ")}}
+        <a class="list-group-item list-group-item-action">HP : {{pokemon.hp}}</a>
+        <a class="list-group-item list-group-item-action list-group-item-secondary">CP : {{pokemon.cp}}</a>
+        <a class="list-group-item list-group-item-action mt-2">
+          <span class="text-dark font-weight-bold rounded-circle mr-3 p-2" :style="{ backgroundColor: TypeColorHelper(type) }" v-for="(type,index) in pokemon.types" :key="index">
+            {{type}}
+          </span>
         </a>
       </div>
       <div class="d-flex mt-2 justify-content-between">
