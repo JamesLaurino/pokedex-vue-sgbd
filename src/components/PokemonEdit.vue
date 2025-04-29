@@ -18,12 +18,27 @@ onMounted(() => {
 <template>
   <div v-if="pokemon">
     <div class="container d-flex justify-content-center mt-4">
-      <p class="h4">Formulaire d'édition d'un pokémon : {{pokemon.name}}</p>
+      <p class="h4">Formulaire d'édition du pokémon : {{pokemon.name}}</p>
     </div>
-
+  </div>
+  <div v-else class="d-flex justify-content-center align-items-center my-5">
+    <div class="spinner"></div>
   </div>
 </template>
 
 <style scoped>
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #ccc;
+    border-top: 4px solid #4caf50; /* vert */
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
 
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
 </style>

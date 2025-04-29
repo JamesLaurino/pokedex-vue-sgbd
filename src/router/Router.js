@@ -5,6 +5,7 @@ import PokemonDetails from "../pages/PokemonDetails.vue";
 import PokemonAdd from "../pages/PokemonAdd.vue";
 import PokemonEdit from "../components/PokemonEdit.vue";
 import LoginUser from "../pages/LoginUser.vue";
+import NotFound from "../pages/NotFound.vue";
 
 
 const routes = [
@@ -33,6 +34,10 @@ const routes = [
     {
         path: '/login',
         component: LoginUser
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        component: NotFound
     }
 ]
 

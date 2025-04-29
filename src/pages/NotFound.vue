@@ -1,0 +1,16 @@
+<script setup>
+
+</script>
+
+<template>
+  <div class="container h3 d-flex justify-content-center mt-4">
+    <p>Page not found</p>
+  </div>
+  <div class="container d-flex justify-content-center">
+    <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/detail/035.png" width="400px" height="400px" />
+  </div>
+</template>
+
+<style scoped>
+
+</style>
