@@ -45,8 +45,25 @@ onMounted(() => {
       </div>
     </div>
 
-  <div v-else>
-    loadin
+  <div v-else class="d-flex justify-content-center align-items-center my-5">
+    <div class="spinner"></div>
   </div>
 
 </template>
+
+<style scoped>
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #ccc;
+    border-top: 4px solid #4caf50; /* vert */
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>

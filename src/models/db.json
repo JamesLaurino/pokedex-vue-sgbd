@@ -123,6 +123,48 @@
       "types": [
         "Feu"
       ]
+    },
+    {
+      "id": "13",
+      "name": "Ivysaur",
+      "hp": 24,
+      "cp": 18,
+      "picture": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/002.png",
+      "types": [
+        "Poison",
+        "Plante"
+      ]
+    },
+    {
+      "id": "14",
+      "name": "Venusaur",
+      "hp": 34,
+      "cp": 28,
+      "picture": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/003.png",
+      "types": [
+        "Poison",
+        "Plante"
+      ]
+    },
+    {
+      "id": "15",
+      "name": "Charmeleon",
+      "hp": 38,
+      "cp": 16,
+      "picture": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/005.png",
+      "types": [
+        "Feu"
+      ]
+    },
+    {
+      "id": "16",
+      "name": "Charizard",
+      "hp": 48,
+      "cp": 26,
+      "picture": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/006.png",
+      "types": [
+        "Feu"
+      ]
     }
   ],
   "client": [
