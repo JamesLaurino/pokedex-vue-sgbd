@@ -4,6 +4,7 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 import SearchBar from "../components/SearchBar.vue"
 import axios from 'axios'
 import PokemonCard from "../components/PokemonCard.vue"
+import PokemonService from "../service/PokemonService.js";
 
 const pokemonList = ref([])
 const start = ref(0)

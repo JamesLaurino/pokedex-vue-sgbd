@@ -1,7 +1,7 @@
 export default class PokemonService {
 
-    static getPokemons() {
-        return fetch('http://localhost:3001/pokemons')
+    static getPokemons(start,end) {
+        return fetch(`http://localhost:3001/pokemons?_start=${start}&_end=${end}`)
             .then(response => response.json())
             .catch(error => this.handleError(error));
     }

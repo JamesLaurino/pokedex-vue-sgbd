@@ -1,5 +1,4 @@
 <script setup>
-import {ref} from "vue";
 
 defineProps({
   pokemonList: {
@@ -7,8 +6,6 @@ defineProps({
     required:true
   }
 })
-
-let isActive = ref(false)
 
 </script>
 
