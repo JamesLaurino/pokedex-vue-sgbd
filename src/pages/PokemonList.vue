@@ -4,7 +4,7 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 import SearchBar from "../components/SearchBar.vue"
 import axios from 'axios'
 import PokemonCard from "../components/PokemonCard.vue"
-import PokemonService from "../service/PokemonService.js";
+
 
 const pokemonList = ref([])
 const start = ref(0)
@@ -12,7 +12,7 @@ const limit = 6
 const isLoading = ref(false)
 const noMoreData = ref(false)
 
-const fetchPokemons = async () => {
+async function fetchPokemons() {
   if (isLoading.value || noMoreData.value) return
 
   isLoading.value = true
