@@ -1,10 +1,12 @@
 <script setup>
 
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import {ref, onMounted, onBeforeUnmount, watch} from 'vue'
 import SearchBar from "../components/SearchBar.vue"
 import PokemonCard from "../components/PokemonCard.vue"
 import '/src/assets/styles/spinner-style.css';
-
+import { useI18n } from 'vue-i18n';
+import ToggleLang from "../components/ToggleLang.vue";
+const { t } = useI18n();
 
 const pokemonList = ref([])
 const start = ref(0)
@@ -48,7 +50,6 @@ onMounted(() => {
   fetchPokemons()
   window.addEventListener('scroll', handleScroll)
 })
-
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', handleScroll)
 })
@@ -59,6 +60,9 @@ onBeforeUnmount(() => {
   <div class="container d-flex justify-content-center">
     <SearchBar />
   </div>
+  <div class="container d-flex justify-content-center mt-3">
+    <ToggleLang/>
+  </div>
   <div class="container my-4 mt-5">
     <div class="row">
         <PokemonCard :pokemonList="pokemonList" />
@@ -68,6 +72,6 @@ onBeforeUnmount(() => {
       <div class="spinner"></div>
     </div>
 
-    <p v-if="noMoreData" class="text-center mt-4">Plus de pokémons à charger.</p>
+    <p v-if="noMoreData" class="text-center mt-4">{{ t('loading_pokemon') }}</p>
   </div>
 </template>

@@ -26,12 +26,11 @@ const error = ref({
   "type":false
 })
 const router = useRouter();
-const typePokemon = ref([...pokemon.types])
 
 function submitPokemon() {
   try
   {
-    mapTypes()
+    checkType()
     checkName();
     checkPicture();
     checkCP();
@@ -40,9 +39,11 @@ function submitPokemon() {
     const hasError = Object.values(error.value).some(val => val === true);
     if(!hasError) {
       if(isEdit) {
+        //todo check update pokemon
         //PokemonService.updatePokemon(pokemon);
       }
       else {
+        //todo check add pokemon
         //PokemonService.addPokemon(pokemon);
       }
       window.alert("Opération effectuée avec succés");
@@ -73,12 +74,10 @@ function checkPicture() {
     error.value.picture = true;
   }
 }
-function mapTypes() {
+function checkType() {
+
   try {
-    if(typePokemon.value.length <= 2 && typePokemon.value.length > 0) {
-      pokemon.types = [...typePokemon.value];
-    }
-    else {
+    if(pokemon.types.length > 2 || pokemon.types.length <= 0) {
       error.value.type = true;
     }
   }catch (e) {
@@ -123,7 +122,7 @@ function mapTypes() {
 
     <div class="form-group mb-3">
         <span v-for="(type,index) in PokemonService.typesPokemon()" :key="index">
-          <input type="checkbox" v-model="typePokemon" :id="index" :name="type" :value="type">
+          <input type="checkbox" v-model="pokemon.types" :id="index" :name="type" :value="type">
           <label :for="index" class="p-1 mr-3 ml-2 rounded-circle p-1"
                  :style="{ backgroundColor: TypeColorHelper(type) }">{{type}}</label>
         </span>
