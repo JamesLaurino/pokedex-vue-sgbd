@@ -4,6 +4,7 @@ import {ref} from "vue";
 import PokemonService from "../service/PokemonService.js";
 import TypeColorHelper from "../helpers/TypeColorHelper.js";
 import {useRouter} from "vue-router";
+import '/src/assets/styles/material-style.css';
 
 
 const pokemon = ref({
@@ -133,47 +134,9 @@ function mapTypes() {
   </div>
 </template>
 
-<style>
-
+<style scoped>
 .error {
   color: red;
   font-size: 0.9em;
-}
-.mat-label {
-  font-family: "system-ui", "Courier New", monospace;
-}
-.mat-input-field {
-  position: relative;
-  margin-top: 20px;
-}
-.mat-input-field .mat-text {
-  border: none;
-  border-bottom: 2px solid #9e9e9e;
-  outline: none;
-  font-size: 25px;
-  padding: 5px 0;
-  width: 100%;
-  transition: border-color 0.3s;
-}
-.mat-input-field .mat-label {
-  position: absolute;
-  top: -8px;
-  left: 0;
-  font-size: 16px;
-  color: #9e9e9e;
-  transition: all 0.3s;
-  pointer-events: none;
-}
-.mat-input-field input:focus {
-  border-bottom: 2px solid #26a69a;
-}
-.mat-input-field input:focus + .mat-label,
-.mat-input-field input:valid + .mat-label {
-  top: -15px;
-  font-size: 12px;
-  color: #26a69a;
-}
-input::placeholder {
-  font: 1rem/3 sans-serif;
 }
 </style>

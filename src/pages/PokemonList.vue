@@ -2,8 +2,8 @@
 
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import SearchBar from "../components/SearchBar.vue"
-import axios from 'axios'
 import PokemonCard from "../components/PokemonCard.vue"
+import '/src/assets/styles/spinner-style.css';
 
 
 const pokemonList = ref([])
@@ -18,12 +18,14 @@ async function fetchPokemons() {
   isLoading.value = true
   try {
     const end = start.value + limit
-    const response = await axios.get(`http://localhost:3001/pokemons?_start=${start.value}&_end=${end}`)
 
-    if (response.data.length === 0) {
+    const dataApi = await fetch(`http://localhost:3001/pokemons?_start=${start.value}&_end=${end}`)
+    const response = await dataApi.json();
+
+    if (response.length === 0) {
       noMoreData.value = true
     } else {
-      pokemonList.value.push(...response.data)
+      pokemonList.value.push(...response)
       start.value = end
     }
   } catch (error) {
@@ -67,21 +69,3 @@ onBeforeUnmount(() => {
     <p v-if="noMoreData" class="text-center mt-4">Plus de pokémons à charger.</p>
   </div>
 </template>
-
-<style scoped>
-  .spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid #ccc;
-    border-top: 4px solid #007bff;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
-
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-</style>

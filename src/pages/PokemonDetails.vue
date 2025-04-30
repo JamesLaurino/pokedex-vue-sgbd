@@ -3,6 +3,7 @@ import { useRoute } from 'vue-router'
 import {onMounted, ref} from "vue";
 import PokemonService from "../service/PokemonService.js";
 import TypeColorHelper from "../helpers/TypeColorHelper.js";
+import '/src/assets/styles/spinner-style.css';
 
 const route = useRoute();
 const pokemonId = route.params.id;
@@ -12,8 +13,6 @@ onMounted(() => {
   PokemonService.getPokemonById(pokemonId)
       .then(data => {pokemon.value = data});
 });
-
-
 </script>
 
 
@@ -49,20 +48,3 @@ onMounted(() => {
   </div>
 
 </template>
-
-<style scoped>
-  .spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid #ccc;
-    border-top: 4px solid #4caf50; /* vert */
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
-
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-</style>
