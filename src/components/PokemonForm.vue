@@ -26,7 +26,7 @@ const error = ref({
   "type":false
 })
 const router = useRouter();
-const typePokemon = ref([])
+const typePokemon = ref([...pokemon.types])
 
 function submitPokemon() {
   try

@@ -23,12 +23,12 @@ function searchPokemon(pokemonName) {
 </script>
 
 <template>
-  <div class="container mt-3 shadow p-3" style="width: 500px">
+  <div class="container mt-3 shadow p-3" style="width: 800px">
       <div class="row justify-content-center">
         <div class="col-3 text-center">
           <div class="mat-input-field">
             <input type="text" v-model="pokemonName" class="mat-text" id="name" required>
-            <label class="mat-label" for="name">Rechercher un pokémon</label>
+            <label class="mat-label" for="name">Find one</label>
           </div>
         </div>
         <div class="mt-4">
