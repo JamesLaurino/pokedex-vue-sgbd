@@ -28,7 +28,7 @@ const error = ref({
 const router = useRouter();
 const typePokemon = ref([])
 
-function addPokemon() {
+function submitPokemon() {
   try
   {
     mapTypes()
@@ -41,12 +41,11 @@ function addPokemon() {
     if(!hasError) {
       if(isEdit) {
         PokemonService.updatePokemon(pokemon);
-        window.alert("Pokémon édité avec succés");
       }
       else {
         PokemonService.addPokemon(pokemon);
-        window.alert("Pokémon ajouté avec succés");
       }
+      window.alert("Opération effectuée avec succés");
       router.push({ path: '/pokemons'});
     }
   }
@@ -92,7 +91,7 @@ function mapTypes() {
 </script>
 
 <template>
-  <form @submit.prevent="addPokemon">
+  <form @submit.prevent="submitPokemon">
     <div class="form-group row mb-3">
       <div class="col-md-12">
         <div class="mat-input-field">

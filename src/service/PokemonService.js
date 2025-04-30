@@ -12,8 +12,15 @@ export default class PokemonService {
             .then(data => data)
             .catch(error => this.handleError(error));
     }
+
     static updatePokemon(pokemon) {
-        return true;
+        return fetch(`http://localhost:3001/pokemons/${pokemon.id}`, {
+            method: 'PUT',
+            body: JSON.stringify(pokemon),
+            headers: { 'Content-Type': 'application/json' }
+        })
+            .then(response => response.json())
+            .catch(error => this.handleError(error));
     }
 
     static addPokemon(pokemon) {
