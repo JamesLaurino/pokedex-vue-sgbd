@@ -12,6 +12,9 @@ export default class PokemonService {
             .then(data => data)
             .catch(error => this.handleError(error));
     }
+    static updatePokemon(pokemon) {
+        return true;
+    }
 
     static addPokemon(pokemon) {
 

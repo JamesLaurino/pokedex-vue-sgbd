@@ -56,7 +56,9 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <SearchBar />
+  <div class="container d-flex justify-content-center">
+    <SearchBar />
+  </div>
   <div class="container my-4 mt-5">
     <div class="row">
         <PokemonCard :pokemonList="pokemonList" />

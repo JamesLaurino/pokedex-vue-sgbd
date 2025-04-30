@@ -20,11 +20,10 @@ function searchPokemon(pokemonName) {
       .then(datas => {pokemonList.value = datas});
 }
 
-
 </script>
 
 <template>
-  <div class="container mt-3 shadow p-3" style="width: 1000px">
+  <div class="container mt-3 shadow p-3" style="width: 500px">
       <div class="row justify-content-center">
         <div class="col-3 text-center">
           <div class="mat-input-field">

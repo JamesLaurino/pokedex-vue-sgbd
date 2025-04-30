@@ -23,8 +23,8 @@ const TypeColorHelper = (typeInput) => {
         case 'Vol':
             typeOutput = '#8583b5';
             break;
-        case 'Electric':
-            typeOutput = '#cfe151';
+        case 'Electrik':
+            typeOutput = '#f1ef06';
             break;
         case 'Fée':
             typeOutput = '#c033ad';
