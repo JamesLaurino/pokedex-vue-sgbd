@@ -40,10 +40,10 @@ function submitPokemon() {
     const hasError = Object.values(error.value).some(val => val === true);
     if(!hasError) {
       if(isEdit) {
-        PokemonService.updatePokemon(pokemon);
+        //PokemonService.updatePokemon(pokemon);
       }
       else {
-        PokemonService.addPokemon(pokemon);
+        //PokemonService.addPokemon(pokemon);
       }
       window.alert("Opération effectuée avec succés");
       router.push({ path: '/pokemons'});
@@ -54,31 +54,29 @@ function submitPokemon() {
   }
 }
 function checkName() {
-  if(pokemon.value.name.length <= 2) {
+  if(pokemon.name.length <= 2) {
     error.value.name = true;
   }
 }
 function checkHP() {
-  if(pokemon.value.hp <= 0) {
+  if(pokemon.hp <= 0) {
     error.value.hp = true;
   }
 }
 function checkCP() {
-  if(pokemon.value.cp <= 0) {
+  if(pokemon.cp <= 0) {
     error.value.cp = true;
   }
 }
 function checkPicture() {
-  if(!urlPattern.test(pokemon.value.picture)) {
+  if(!urlPattern.test(pokemon.picture)) {
     error.value.picture = true;
   }
 }
 function mapTypes() {
   try {
     if(typePokemon.value.length <= 2 && typePokemon.value.length > 0) {
-      typePokemon.value.forEach((e) => {
-        pokemon.value.types.push(e)
-      });
+      pokemon.types = [...typePokemon.value];
     }
     else {
       error.value.type = true;
@@ -129,6 +127,7 @@ function mapTypes() {
           <label :for="index" class="p-1 mr-3 ml-2 rounded-circle p-1"
                  :style="{ backgroundColor: TypeColorHelper(type) }">{{type}}</label>
         </span>
+      <div v-if="error.type" class="error mb-1">Minimum 1 type et maximum 2</div>
     </div>
 
     <button type="submit" class="btn btn-success">Submit</button>
