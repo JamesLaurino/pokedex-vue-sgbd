@@ -1,6 +1,7 @@
 <script setup>
 import {ref, watch} from "vue";
 import PokemonService from "../service/PokemonService.js";
+import '/src/assets/styles/material-style.css';
 
 const pokemonList = ref([]);
 const pokemonName = ref("")
@@ -47,42 +48,3 @@ function searchPokemon(pokemonName) {
       </div>
     </div>
 </template>
-
-<style>
-.mat-label {
-  font-family: "Lucida Console", "Courier New", monospace;
-}
-.mat-input-field {
-  position: relative;
-  margin-top: 20px;
-}
-
-.mat-input-field .mat-text {
-  border: none;
-  border-bottom: 2px solid #9e9e9e;
-  outline: none;
-  font-size: 25px;
-  padding: 5px 0;
-  width: 100%;
-  transition: border-color 0.3s;
-}
-.mat-input-field .mat-label {
-  position: absolute;
-  top: 5px;
-  left: 0;
-  font-size: 16px;
-  color: #9e9e9e;
-  transition: all 0.3s;
-  pointer-events: none;
-}
-.mat-input-field input:focus {
-  border-bottom: 2px solid #26a69a;
-}
-.mat-input-field input:focus + .mat-label,
-.mat-input-field input:valid + .mat-label {
-  top: -15px;
-  font-size: 12px;
-  color: #26a69a;
-}
-
-</style>

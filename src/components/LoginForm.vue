@@ -59,7 +59,3 @@ function connexion() {
     </form>
   </div>
 </template>
-
-<style scoped>
-
-</style>

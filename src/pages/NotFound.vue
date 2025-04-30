@@ -10,7 +10,3 @@
     <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/detail/035.png" width="400px" height="400px" />
   </div>
 </template>
-
-<style scoped>
-
-</style>

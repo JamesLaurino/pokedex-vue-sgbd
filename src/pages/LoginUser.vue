@@ -11,7 +11,3 @@ import LoginForm from "../components/LoginForm.vue";
     <LoginForm/>
   </div>
 </template>
-
-<style scoped>
-
-</style>
