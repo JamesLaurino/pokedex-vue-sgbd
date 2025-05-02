@@ -4,6 +4,8 @@ import {useRouter} from "vue-router";
 import PokemonService from "../service/PokemonService.js";
 import TypeColorHelper from "../helpers/TypeColorHelper.js";
 import '/src/assets/styles/material-style.css';
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const { pokemon, isEdit } = defineProps({
   pokemon: {
@@ -93,16 +95,16 @@ function checkType() {
       <div class="col-md-12">
         <div class="mat-input-field">
           <input  v-model="pokemon.name" type="text" class="mat-text" id="name" required>
-          <label class="mat-label" for="name">Pokémon name</label>
-          <span v-if="error.name" class="error mt-1">La longueur du nom doit être supérieur à deux</span>
+          <label class="mat-label" for="name">{{t("pokemon_name")}}</label>
+          <span v-if="error.name" class="error mt-1">{{t("length_name")}}</span>
         </div>
       </div>
       <div class="col-md-12">
         <div class="mat-input-field">
           <input  v-model="pokemon.picture" type="text"
                   class="mat-text" id="picture" required>
-          <label class="mat-label" for="picture">Picture</label>
-          <span v-if="error.picture" class="error mt-1">Le format n'est pas correct</span>
+          <label class="mat-label" for="picture">{{t("picture_pokemon")}}</label>
+          <span v-if="error.picture" class="error mt-1">{{t("format_asset")}}</span>
         </div>
       </div>
     </div>
@@ -111,12 +113,12 @@ function checkType() {
       <div class="col-md-4">
         <label for="hp" class="form-label">HP</label>
         <input v-model.number="pokemon.hp" type="number" class="form-control" id="hp" required>
-        <span v-if="error.hp" class="error mt-1">Le HP doit être plus grand que zero</span>
+        <span v-if="error.hp" class="error mt-1">{{t("format_hp")}}</span>
       </div>
       <div class="col-md-6">
         <label for="cp" class="form-label">CP</label>
         <input v-model.number="pokemon.cp" type="number" class="form-control" id="cp" required>
-        <span v-if="error.cp" class="error mt-1">Le CP doit être plus grand que zero</span>
+        <span v-if="error.cp" class="error mt-1">{{t("format_cp")}}</span>
       </div>
     </div>
 
@@ -126,11 +128,11 @@ function checkType() {
           <label :for="index" class="p-1 mr-3 ml-2 rounded-circle p-1"
                  :style="{ backgroundColor: TypeColorHelper(type) }">{{type}}</label>
         </span>
-      <div v-if="error.type" class="error mb-1">Minimum 1 type et maximum 2</div>
+      <div v-if="error.type" class="error mb-1">{{t("check_type")}}</div>
     </div>
 
-    <button type="submit" class="btn btn-success">Submit</button>
-    <router-link class="btn btn-dark ml-3" :to="`/pokemons`">retour</router-link>
+    <button type="submit" class="btn btn-success">{{t("submit")}}</button>
+    <router-link class="btn btn-dark ml-3" :to="`/pokemons`">{{t("back")}}</router-link>
   </form>
 </template>
 

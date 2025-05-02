@@ -1,4 +1,6 @@
 <script setup>
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 </script>
 
@@ -19,7 +21,7 @@
           <i class="bi bi-instagram fs-4"></i>
         </a>
       </div>
-      <p class="mb-0">Mon Pokédex. Tous droits réservés.</p>
+      <p class="mb-0">{{ t("copyright")}}</p>
     </div>
   </footer>
 </template>

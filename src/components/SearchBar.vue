@@ -2,6 +2,8 @@
 import {ref, watch} from "vue";
 import PokemonService from "../service/PokemonService.js";
 import '/src/assets/styles/material-style.css';
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const pokemonList = ref([]);
 const pokemonName = ref("")
@@ -28,7 +30,7 @@ function searchPokemon(pokemonName) {
         <div class="col-3 text-center">
           <div class="mat-input-field">
             <input type="text" v-model="pokemonName" class="mat-text" id="name" required>
-            <label class="mat-label" for="name">Find one</label>
+            <label class="mat-label" for="name">{{t("find_one")}}</label>
           </div>
         </div>
         <div class="mt-4">

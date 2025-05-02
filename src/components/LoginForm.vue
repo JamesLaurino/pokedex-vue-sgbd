@@ -1,10 +1,10 @@
 <script setup>
 
-
 import {ref} from "vue";
 import UserService from "../service/UserService.js";
 import {useRouter} from "vue-router";
-
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const user = ref(null);
 const userInput = ref({
@@ -45,17 +45,17 @@ function connexion() {
         <div class="col-md-12">
           <div class="mat-input-field">
             <input type="text" v-model="userInput.name" class="mat-text" id="name" required>
-            <label class="mat-label" for="name">Username</label>
+            <label class="mat-label" for="name">{{t("username")}}</label>
           </div>
         </div>
         <div class="col-md-12">
           <div class="mat-input-field">
             <input type="password" v-model="userInput.password" class="mat-text" id="password" required>
-            <label class="mat-label" for="password">Password</label>
+            <label class="mat-label" for="password">{{t("password")}}</label>
           </div>
         </div>
       </div>
-      <button type="submit" class="btn btn-dark">Login</button>
+      <button type="submit" class="btn btn-dark">{{t("login")}}</button>
     </form>
   </div>
 </template>

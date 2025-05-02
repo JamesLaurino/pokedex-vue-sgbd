@@ -4,8 +4,8 @@ import {ref, onMounted, onBeforeUnmount, watch} from 'vue'
 import SearchBar from "../components/SearchBar.vue"
 import PokemonCard from "../components/PokemonCard.vue"
 import '/src/assets/styles/spinner-style.css';
-import { useI18n } from 'vue-i18n';
 import ToggleLang from "../components/ToggleLang.vue";
+import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 
 const pokemonList = ref([])
@@ -57,11 +57,11 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
+  <div class="container d-flex justify-content-center mt-3">
+    <p class="h2">{{t("pokedex")}}</p>
+  </div>
   <div class="container d-flex justify-content-center">
     <SearchBar />
-  </div>
-  <div class="container d-flex justify-content-center mt-3">
-    <ToggleLang/>
   </div>
   <div class="container my-4 mt-5">
     <div class="row">
