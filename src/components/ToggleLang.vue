@@ -37,7 +37,7 @@ watch(isEnglish, (val) => {
   display: block;
   width: 100%;
   height: 100%;
-  background: #ddd;
+  background: #232529;
   border-radius: 999px;
   position: relative;
   cursor: pointer;
@@ -50,7 +50,7 @@ watch(isEnglish, (val) => {
   left: 3px;
   width: 28px;
   height: 28px;
-  background: white;
+  background: #12781a;
   border-radius: 50%;
   transition: transform 0.3s ease;
   z-index: 2;
