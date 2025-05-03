@@ -4,8 +4,8 @@ import {ref, onMounted, onBeforeUnmount, watch} from 'vue'
 import SearchBar from "../components/SearchBar.vue"
 import PokemonCard from "../components/PokemonCard.vue"
 import '/src/assets/styles/spinner-style.css';
-import ToggleLang from "../components/ToggleLang.vue";
 import { useI18n } from 'vue-i18n';
+import PokemonService from "../service/PokemonService.js";
 const { t } = useI18n();
 
 const pokemonList = ref([])
@@ -14,40 +14,17 @@ const limit = 6
 const isLoading = ref(false)
 const noMoreData = ref(false)
 
-async function fetchPokemons() {
-  if (isLoading.value || noMoreData.value) return
-
-  isLoading.value = true
-  try {
-    const end = start.value + limit
-
-    const dataApi = await fetch(`http://localhost:3001/pokemons?_start=${start.value}&_end=${end}`)
-    const response = await dataApi.json();
-
-    if (response.length === 0) {
-      noMoreData.value = true
-    } else {
-      pokemonList.value.push(...response)
-      start.value = end
-    }
-  } catch (error) {
-    console.error('Erreur de chargement :', error)
-  } finally {
-    isLoading.value = false
-  }
-}
-
 const handleScroll = () => {
   const scrollPosition = window.scrollY + window.innerHeight
   const documentHeight = document.documentElement.scrollHeight
 
   if (scrollPosition >= documentHeight - 10) {
-    fetchPokemons()
+    PokemonService.fetchPokemons(isLoading, noMoreData, pokemonList, start, limit)
   }
 }
 
 onMounted(() => {
-  fetchPokemons()
+  PokemonService.fetchPokemons(isLoading, noMoreData, pokemonList, start, limit)
   window.addEventListener('scroll', handleScroll)
 })
 onBeforeUnmount(() => {

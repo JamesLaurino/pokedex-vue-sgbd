@@ -1,20 +1,35 @@
 export default class PokemonService {
 
-    static getPokemons() {
-        return fetch(`http://localhost:3001/pokemons?_start=${start}&_end=${end}`)
-            .then(response => response.json())
-            .catch(error => this.handleError(error));
+    static async fetchPokemons(isLoading, noMoreData, pokemonList, start, limit) {
+        if (isLoading.value || noMoreData.value) return
+
+        isLoading.value = true
+        try {
+            const end = start.value + limit
+            const dataApi = await fetch(`${import.meta.env.VITE_API_URL}/pokemons?_start=${start.value}&_end=${end}`)
+            const response = await dataApi.json();
+
+            if (response.length === 0) {
+                noMoreData.value = true
+            } else {
+                pokemonList.value.push(...response)
+                start.value = end
+            }
+        } catch (error) {
+            console.error('Erreur de chargement :', error)
+        } finally {
+            isLoading.value = false
+        }
     }
 
     static getPokemonById(id) {
-        return fetch(`http://localhost:3001/pokemons/${id}`)
+        return fetch(`${import.meta.env.VITE_API_URL}/pokemons/${id}`)
             .then(response => response.json())
-            .then(data => data)
             .catch(error => this.handleError(error));
     }
 
     static updatePokemon(pokemon) {
-        return fetch(`http://localhost:3001/pokemons/${pokemon.id}`, {
+        return fetch(`${import.meta.env.VITE_API_URL}/pokemons/${pokemon.id}`, {
             method: 'PUT',
             body: JSON.stringify(pokemon),
             headers: { 'Content-Type': 'application/json' }
@@ -25,7 +40,7 @@ export default class PokemonService {
 
     static addPokemon(pokemon) {
 
-        return fetch(`http://localhost:3001/pokemons`, {
+        return fetch(`${import.meta.env.VITE_API_URL}/pokemons`, {
             method: 'POST',
             body: JSON.stringify(pokemon),
             headers: { 'Content-Type': 'application/json'}
@@ -36,7 +51,7 @@ export default class PokemonService {
 
     static searchPokemon(term) {
 
-        return fetch(`http://localhost:3001/pokemons?name_like=${term}`)
+        return fetch(`${import.meta.env.VITE_API_URL}/pokemons?name_like=${term}`)
             .then(response => response.json())
             .catch(error => this.handleError(error));
 
@@ -60,6 +75,6 @@ export default class PokemonService {
         return Object.keys(data).length === 0;
     }
     static handleError(error){
-        console.error(error);
+        console.log(error);
     }
 }

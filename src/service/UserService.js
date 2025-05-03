@@ -1,10 +1,9 @@
 export default class UserService {
 
     static isUserConnected = false;
-
     static searchUserByEmail(term) {
 
-        return fetch(`http://localhost:3001/client?name=${term}`)
+        return fetch(`${import.meta.env.VITE_API_URL}/client?name=${term}`)
             .then(response => response.json())
             .catch(error => this.handleError(error));
 
