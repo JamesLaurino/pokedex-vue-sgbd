@@ -11,33 +11,33 @@ import NotFound from "../pages/NotFound.vue";
 const routes = [
     {
         path: '/',
-        component: PokemonList
+        component: () => import('../pages/PokemonList.vue')
     },
     {
         path: '/pokemons',
-        component: PokemonList
+        component: () => import('../pages/PokemonList.vue')
     },
     {
         path: '/pokemon/:id/show',
-        component: PokemonDetails
+        component: () => import('../pages/PokemonDetails.vue')
     },
     {
         path: '/pokemon/add',
-        component: PokemonAdd,
+        component: () => import('../pages/PokemonAdd.vue'),
         meta: { requiresAuth: true }
     },
     {
         path: '/pokemon/:id/edit',
-        component: PokemonEdit,
+        component: () => import('../components/PokemonEdit.vue'),
         meta: { requiresAuth: true }
     },
     {
         path: '/login',
-        component: LoginUser
+        component: () => import('../pages/LoginUser.vue')
     },
     {
         path: '/:pathMatch(.*)*',
-        component: NotFound
+        component: () => import('../pages/NotFound.vue')
     }
 ]
 
