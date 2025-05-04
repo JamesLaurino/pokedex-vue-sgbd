@@ -1,31 +1,49 @@
+import {useInfiniteQuery, useQuery} from "@tanstack/vue-query";
+import {ref, watch} from "vue";
+
 export default class PokemonService {
 
-    static async fetchPokemons(isLoading, noMoreData, pokemonList, start, limit) {
-        if (isLoading.value || noMoreData.value) return
+    static PAGE_LIMIT = 6;
 
-        isLoading.value = true
-        try {
-            const end = start.value + limit
-            const dataApi = await fetch(`${import.meta.env.VITE_API_URL}/pokemons?_start=${start.value}&_end=${end}`)
-            const response = await dataApi.json();
+    static async fetchPokemons({ pageParam = 0 }) {
+        const start = pageParam;
+        const end = start + PokemonService.PAGE_LIMIT;
+        const url = `${import.meta.env.VITE_API_URL}/pokemons?_start=${start}&_end=${end}`;
 
-            if (response.length === 0) {
-                noMoreData.value = true
-            } else {
-                pokemonList.value.push(...response)
-                start.value = end
-            }
-        } catch (error) {
-            console.error('Erreur de chargement :', error)
-        } finally {
-            isLoading.value = false
-        }
+        const res = await fetch(url);
+        const data = await res.json();
+
+        return { data: data, nextStart: end, isLastPage: data.length === 0 };
+    }
+
+    static useInfinitePokemons() {
+        return useInfiniteQuery({
+            queryKey: ['pokemons'],
+            queryFn: ({ pageParam }) =>
+                PokemonService.fetchPokemons({ pageParam }),
+            getNextPageParam: (lastPage) => {
+                if (lastPage.isLastPage) return undefined;
+                return lastPage.nextStart;
+            },
+            staleTime: 5 * 60 * 1000, // 5 minutes
+            cacheTime: 30 * 60 * 1000, // 30 minutes
+        });
     }
 
     static getPokemonById(id) {
         return fetch(`${import.meta.env.VITE_API_URL}/pokemons/${id}`)
             .then(response => response.json())
             .catch(error => this.handleError(error));
+    }
+
+    static useGetPokemonById(id) {
+        return useQuery({
+            queryKey: ['pokemon', id],
+            queryFn: () => PokemonService.getPokemonById(id),
+            staleTime: 5 * 60 * 1000, // cache "frais" pendant 5 minutes
+            cacheTime: 30 * 60 * 1000, // garde les données en cache pendant 30 minutes
+            enabled: !!id, // n'exécute la requête que si id est défini
+        })
     }
 
     static updatePokemon(pokemon) {
@@ -50,11 +68,9 @@ export default class PokemonService {
     }
 
     static searchPokemon(term) {
-
         return fetch(`${import.meta.env.VITE_API_URL}/pokemons?name_like=${term}`)
             .then(response => response.json())
             .catch(error => this.handleError(error));
-
     }
 
     static typesPokemon() {
@@ -76,5 +92,6 @@ export default class PokemonService {
     }
     static handleError(error){
         console.log(error);
+        throw error;
     }
 }

@@ -1,6 +1,5 @@
 <script setup>
 import { useRoute } from 'vue-router'
-import {onMounted, ref} from "vue";
 import PokemonService from "../service/PokemonService.js";
 import TypeColorHelper from "../helpers/TypeColorHelper.js";
 import '/src/assets/styles/spinner-style.css';
@@ -9,12 +8,8 @@ const { t } = useI18n();
 
 const route = useRoute();
 const pokemonId = route.params.id;
-const pokemon = ref(null);
+const { data: pokemon, isLoading, error } = PokemonService.useGetPokemonById(pokemonId);
 
-onMounted(() => {
-  PokemonService.getPokemonById(pokemonId)
-      .then(data => {pokemon.value = data});
-});
 </script>
 
 
@@ -45,8 +40,12 @@ onMounted(() => {
       </div>
     </div>
 
-  <div v-else class="d-flex justify-content-center align-items-center my-5">
+  <div v-if="isLoading" class="d-flex justify-content-center align-items-center my-5">
     <div class="spinner"></div>
+  </div>
+
+  <div v-if="error">
+    <p>ERROR PAGE</p>
   </div>
 
 </template>
