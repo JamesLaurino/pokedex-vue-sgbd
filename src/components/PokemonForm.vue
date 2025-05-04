@@ -5,6 +5,7 @@ import PokemonService from "../service/PokemonService.js";
 import TypeColorHelper from "../helpers/TypeColorHelper.js";
 import '/src/assets/styles/material-style.css';
 import { useI18n } from 'vue-i18n';
+import BaseButton from "./shares/BaseButton.vue";
 const { t } = useI18n();
 
 const { pokemon, isEdit } = defineProps({
@@ -30,6 +31,11 @@ const error = ref({
 const router = useRouter();
 
 function submitPokemon() {
+
+  Object.keys(error.value).forEach(key => {
+    error.value[key] = false
+  })
+
   try
   {
     checkType()
@@ -49,7 +55,7 @@ function submitPokemon() {
         //PokemonService.addPokemon(pokemon);
       }
       window.alert("Opération effectuée avec succés");
-      router.push({ path: '/pokemons'});
+      //router.push({ path: '/pokemons'});
     }
   }
   catch (e) {
@@ -85,6 +91,10 @@ function checkType() {
   }catch (e) {
     error.value.type = true;
   }
+}
+
+function handleMessage(message) {
+  console.log("Message reçu depuis le composant enfant : " + message);
 }
 
 </script>
@@ -131,7 +141,10 @@ function checkType() {
       <div v-if="error.type" class="error mb-1">{{t("check_type")}}</div>
     </div>
 
-    <button type="submit" class="btn btn-success">{{t("submit")}}</button>
+    <BaseButton type="submit" className="btn btn-success" @msg="handleMessage" >
+      {{t("submit")}}
+    </BaseButton>
+
     <router-link class="btn btn-dark ml-3" :to="`/pokemons`">{{t("back")}}</router-link>
   </form>
 </template>
