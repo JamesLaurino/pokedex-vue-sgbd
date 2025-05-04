@@ -4,6 +4,7 @@ import {ref} from "vue";
 import UserService from "../service/UserService.js";
 import {useRouter} from "vue-router";
 import { useI18n } from 'vue-i18n';
+import BaseButton from "./shares/BaseButton.vue";
 const { t } = useI18n();
 
 const user = ref(null);
@@ -55,7 +56,9 @@ function connexion() {
           </div>
         </div>
       </div>
-      <button type="submit" class="btn btn-dark">{{t("login")}}</button>
+      <BaseButton type="submit" className="btn btn-dark">
+        {{t("login")}}
+      </BaseButton>
     </form>
   </div>
 </template>

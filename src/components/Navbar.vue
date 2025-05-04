@@ -1,6 +1,7 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
 import ToggleLang from "./ToggleLang.vue";
+import BaseButton from "./shares/BaseButton.vue";
 const { t } = useI18n();
 </script>
 
@@ -9,9 +10,10 @@ const { t } = useI18n();
     <router-link class="navbar-brand"  :to="`/pokemons`">
       <img src="../assets/pokeball.png" width="40px" height="40px"/>
     </router-link>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+    <BaseButton class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </BaseButton>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
