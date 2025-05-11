@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build --mode production",
-    "start:api": "json-server --watch src/models/db.json --port=3001 --delay=500",
+    "start:api": "json-server --watch src/models/db.json --host 0.0.0.0 --port=3001 --delay=500",
     "preview": "vite preview"
   },
   "dependencies": {
