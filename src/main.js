@@ -4,8 +4,10 @@ import App from './App.vue'
 import router from "./router/Router.js";
 import {createI18n} from "vue-i18n";
 
-import en from './locales/en.json';
-import fr from './locales/fr.json';
+import LangService from "./service/LangService.js";
+
+const en = await LangService.fetchLangEn();
+const fr =  await LangService.fetchLangFr();
 
 const i18n = createI18n({
     legacy: false,
