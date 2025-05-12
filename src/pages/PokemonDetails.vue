@@ -19,7 +19,7 @@ onMounted(() => {
 
 
 <template>
-    <div v-if="pokemon" class="container shadow mt-3 d-flex flex-column justify-content-center" style="width: 500px; height: 500px">
+    <div v-if="pokemon" class="container shadow mt-5 d-flex flex-column justify-content-center" style="width: 500px; height: 500px">
       <div class="container d-flex justify-content-center">
         <p class="h2 text-black">{{pokemon.name}}</p>
       </div>
