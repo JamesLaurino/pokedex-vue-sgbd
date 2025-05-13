@@ -5,7 +5,11 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
 
 
--> https://assets.pokemon.com/assets/cms2/img/pokedex/detail/006.png
--> Dracaufeau
--> hp : 15 cp : 50
--> Feu
+
+ "name": "Papilusion",
+ "hp": 15,
+ "cp": 17,
+ "picture": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/012.png",
+
+-> Chenipan
+-> https://assets.pokemon.com/assets/cms2/img/pokedex/detail/010.png

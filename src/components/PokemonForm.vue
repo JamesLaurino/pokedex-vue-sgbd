@@ -47,15 +47,13 @@ function submitPokemon() {
     const hasError = Object.values(error.value).some(val => val === true);
     if(!hasError) {
       if(isEdit) {
-        //todo check update pokemon
-        //PokemonService.updatePokemon(pokemon);
+        PokemonService.updatePokemon(pokemon);
       }
       else {
-        //todo check add pokemon
-        //PokemonService.addPokemon(pokemon);
+        PokemonService.addPokemon(pokemon);
       }
       window.alert("Opération effectuée avec succés");
-      //router.push({ path: '/pokemons'});
+      router.push({ path: '/pokemons'});
     }
   }
   catch (e) {
@@ -111,8 +109,14 @@ function handleMessage(message) {
       </div>
       <div class="col-md-12">
         <div class="mat-input-field">
-          <input  v-model="pokemon.picture" type="text"
+          <input v-if="pokemon.picture"  v-model="pokemon.picture" type="text"
                   class="mat-text" id="picture" required>
+
+          <input v-else v-model="pokemon.picture" type="text"
+                 class="mat-text" id="picture"
+                 placeholder="https://assets.pokemon.com/assets/cms2/img/pokedex/detail/XXX.png"
+                 required/>
+
           <label class="mat-label" for="picture">{{t("picture_pokemon")}}</label>
           <span v-if="error.picture" class="error mt-1">{{t("format_asset")}}</span>
         </div>
