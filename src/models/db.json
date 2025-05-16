@@ -200,6 +200,9 @@
     }
   ],
   "en": {
+    "sure_delete": "Are you sure to delete the pokemon with id",
+    "no_more_data": "No more data",
+    "admin_page": "Admin page",
     "loading_pokemon": "No more pokemon to load",
     "form_add_pokemon": "Add form pokemon",
     "back": "Back",
@@ -215,6 +218,8 @@
     "check_type": "Minimum one type and maximum two",
     "submit": "Submit",
     "edit": "Edit",
+    "next": "Next",
+    "prev": "Prev",
     "pokedex": "Pokedex",
     "password": "Password",
     "username": "Username",
@@ -222,9 +227,16 @@
     "copyright": "My Pokedex. All rights are reserve.",
     "list_pokemon": "Pokemon list",
     "action": "What to do ? ",
-    "hello_user": "Hello, {name}!"
+    "hello_user": "Hello, {name}!",
+    "delete": "delete",
+    "delete_pokemon": "Pokemon deletion"
   },
   "fr": {
+    "sure_delete": "Êtes-vous sûr de vouloir supprimer le Pokémon avec l'id",
+    "delete_pokemon": "Suppression du pokémon",
+    "no_more_data": "Il n'y a plus de pokémon à charger",
+    "delete": "Supprimer",
+    "admin_page": "Page admin",
     "loading_pokemon": "Plus de pokémon à charger",
     "back": "Retour",
     "form_add_pokemon": "Formulaire d'ajout d'un pokémon",
@@ -240,6 +252,8 @@
     "picture_pokemon": "Image",
     "submit": "Envoi",
     "edit": "Editer",
+    "next": "Plus",
+    "prev": "Moins",
     "pokedex": "Pokédex",
     "password": "Mot de passe",
     "username": "Nom de l'utilisateur",

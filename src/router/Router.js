@@ -32,6 +32,11 @@ const routes = [
         meta: { requiresAuth: true }
     },
     {
+        path: '/pokemon/admin',
+        component : () => import("../pages/AdminPage.vue"),
+        meta: {requiresAuth: false}
+    },
+    {
         path: '/login',
         component: () => import('../pages/LoginUser.vue')
     },

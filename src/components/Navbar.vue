@@ -33,6 +33,9 @@ const { t } = useI18n();
             <router-link class="dropdown-item" :to="`/pokemon/add`">
               {{ t("form_add_pokemon") }}
             </router-link>
+            <router-link class="dropdown-item" :to="`/pokemon/admin`">
+              {{ t("admin_page") }}
+            </router-link>
             <div class="dropdown-divider"></div>
             <router-link class="dropdown-item" :to="`/login`">
               {{t("login")}}
