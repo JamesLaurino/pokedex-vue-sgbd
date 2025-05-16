@@ -7,15 +7,28 @@ const { t } = useI18n();
 
 const pokemonList = ref([]);
 const pokemonName = ref("")
+let debounceTimeout = null;
 
-watch(pokemonName, (newVal,oldValue) =>
-{
-  if(newVal.length > 1) {
-    searchPokemon(newVal);
-  } else {
+watch(pokemonName, (newVal, oldVal) => {
+
+  if (debounceTimeout)
+  {
+    clearTimeout(debounceTimeout);
+  }
+
+  if (newVal.length > 1) {
+
+    debounceTimeout = setTimeout(function() {
+      searchPokemon(newVal);
+    }, 500);
+
+  }
+  else {
     pokemonList.value = [];
   }
-})
+
+});
+
 
 function searchPokemon(pokemonName) {
   PokemonService.searchPokemon(pokemonName)
