@@ -76,13 +76,8 @@ function prev() {
     </div>
     <div class="container d-flex justify-content-center" >
       <div>
-        <transition name="fade">
-          <button v-if="start >0" @click="prev" class=" btn btn-dark mr-3">{{t("prev")}}</button>
-        </transition>
-
-        <transition name="fade">
-          <button v-if="!noMoreData" @click="next" class="btn btn-dark ml-3">{{t("next")}}</button>
-        </transition>
+          <button :disabled="start<=0"  @click="prev" class=" btn btn-dark mr-3">{{t("prev")}}</button>
+          <button :disabled="noMoreData" @click="next" class="btn btn-dark ml-3">{{t("next")}}</button>
       </div>
     </div>
   </div>
@@ -90,12 +85,3 @@ function prev() {
     <Spinner/>
   </div>
 </template>
-
-<style scoped>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 2s;
-}
-.fade-enter-from, .fade-leave-to {
-  opacity: 0;
-}
-</style>
