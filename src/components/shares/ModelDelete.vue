@@ -9,13 +9,14 @@ const { t } = useI18n();
     id: String
   })
 
-  function deletePokemon() {
+function deletePokemon() {
     try {
-        PokemonService.deletePokemonById(props.id).then(data => {data.value})
+        PokemonService.deletePokemonById(props.id);
+        window.alert("Le pokémon a été supprimé avec succés");
         location.reload();
     }
     catch (e) {
-      console.log("erreur");
+      window.alert("Une erreur est survenue");
     }
   }
 
