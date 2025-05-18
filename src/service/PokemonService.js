@@ -89,7 +89,7 @@ export default class PokemonService {
 
     static searchPokemon(term) {
 
-        return fetch(`${import.meta.env.VITE_API_URL}/pokemons?name_like=${term}`)
+        return fetch(`${import.meta.env.VITE_API_URL}/pokemons/name?name_like=${term}`)
             .then(response => response.json())
             .catch(error => this.handleError(error));
 

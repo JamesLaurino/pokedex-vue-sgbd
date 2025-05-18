@@ -47,9 +47,11 @@ function submitPokemon() {
     const hasError = Object.values(error.value).some(val => val === true);
     if(!hasError) {
       if(isEdit) {
+        pokemon.type = pokemon.type.join(",");
         PokemonService.updatePokemon(pokemon);
       }
       else {
+        pokemon.type = pokemon.type.join(",");
         PokemonService.addPokemon(pokemon);
       }
       window.alert("Opération effectuée avec succés");
@@ -83,7 +85,7 @@ function checkPicture() {
 function checkType() {
 
   try {
-    if(pokemon.types.length > 2 || pokemon.types.length <= 0) {
+    if(pokemon.type.length > 2 || pokemon.type.length <= 0) {
       error.value.type = true;
     }
   }catch (e) {
@@ -138,7 +140,7 @@ function handleMessage(message) {
 
     <div class="form-group mb-3">
         <span v-for="(type,index) in PokemonService.typesPokemon()" :key="index">
-          <input type="checkbox" v-model="pokemon.types" :id="index" :name="type" :value="type">
+          <input type="checkbox" v-model="pokemon.type" :id="index" :name="type" :value="type">
           <label :for="index" class="p-1 mr-3 ml-2 rounded-circle p-1"
                  :style="{ backgroundColor: TypeColorHelper(type) }">{{type}}</label>
         </span>

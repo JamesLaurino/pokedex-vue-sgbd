@@ -9,7 +9,7 @@ const pokemon = ref({
   hp: 0,
   cp: 0,
   picture: '',
-  types: []
+  type: []
 })
 
 </script>

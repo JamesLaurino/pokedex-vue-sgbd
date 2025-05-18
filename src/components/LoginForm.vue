@@ -9,7 +9,6 @@ const { t } = useI18n();
 
 const user = ref(null);
 const userInput = ref({
-  id:'',
   name: '',
   password: "",
 })
@@ -19,21 +18,18 @@ const router = useRouter();
 
 function connexion() {
 
-  UserService.searchUserByEmail(userInput.value.name)
+  UserService.searchUserByEmail(userInput)
       .then(data => {
 
-        user.value = data;
-        isConnected.value = UserService.isConnected(userInput.value, user.value[0])
-
-        if(isConnected.value === true) {
+        if(data.message === "Mot de passe incorrect.") {
+          window.alert("Une erreur est survenue lors de la connexion");
+          router.push({ path: '/login'});
+        } else {
+          user.value = data.data;
+          isConnected.value = UserService.isConnected()
           window.alert("Connection effectuée avec success !")
           router.push({ path: '/pokemons'});
         }
-        else {
-          window.alert("Une erreur est survenue lors de la connexion");
-          router.push({ path: '/login'});
-        }
-
       });
 }
 

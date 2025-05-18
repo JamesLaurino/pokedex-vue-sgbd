@@ -14,7 +14,10 @@ const pokemon = ref(null);
 
 onMounted(() => {
   PokemonService.getPokemonById(pokemonId)
-      .then(data => {pokemon.value = data});
+      .then(data => {
+        pokemon.value = data
+        pokemon.value.type = pokemon.value.type.split(",")
+      });
 });
 
 </script>

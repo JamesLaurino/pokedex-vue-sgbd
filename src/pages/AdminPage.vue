@@ -65,7 +65,7 @@ function prev() {
           <td>{{pokemon.cp}}</td>
           <td>{{pokemon.hp}}</td>
           <td>{{pokemon.picture.substring(58)}}</td>
-          <td>{{pokemon.types.toString()}}</td>
+          <td>{{pokemon.type}}</td>
           <td>
             <ModelDelete :id="pokemon.id"/>
             <router-link class="btn btn-dark ml-3" :to="`/pokemon/${pokemon.id}/edit`">{{t("edit")}}</router-link>

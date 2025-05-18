@@ -26,7 +26,7 @@ defineProps({
   </transition-group>
 </template>
 
-<style>
+<style scoped>
 
 .pokemon-card {
   border: 6px solid transparent;

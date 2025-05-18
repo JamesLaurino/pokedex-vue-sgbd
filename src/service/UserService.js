@@ -1,25 +1,19 @@
 export default class UserService {
 
     static isUserConnected = false;
-    static searchUserByEmail(term) {
 
-        return fetch(`${import.meta.env.VITE_API_URL}/client?name=${term}`)
+    static searchUserByEmail(user) {
+        return fetch(`${import.meta.env.VITE_API_URL}/client`, {
+            method: 'POST',
+            body: JSON.stringify(user.value),
+            headers: { 'Content-Type': 'application/json'}
+        })
             .then(response => response.json())
             .catch(error => this.handleError(error));
-
     }
 
-    static isConnected(userInput, user) {
-        if(user == null || userInput == null) {
-            return UserService.isUserConnected = false;
-        }
-
-        UserService.isUserConnected = user.name === userInput.name && user.password === userInput.password;
-
-        if(UserService.isUserConnected === true) {
-            localStorage.setItem('token','bearer1234')
-        }
-
+    static isConnected() {
+        localStorage.setItem('token','bearer1234')
         return UserService.isUserConnected
     }
 
