@@ -1,7 +1,7 @@
 <script setup>
 
 import {useI18n} from 'vue-i18n';
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import Spinner from "../components/shares/Spinner.vue";
 import ModelDelete from "../components/shares/ModelDelete.vue";
 import PageService from "../service/PageService.js";
@@ -41,6 +41,25 @@ function onPage(pageCurrent) {
   PageService.getPage(pageCurrent).then(pokemons =>
       pokemonList.value = pokemons.pokemon)
 }
+
+const paginationItems = computed(() => {
+  const items = []
+  let dotsShown = false
+
+  for (let i = 1; i <= total.value; i++) {
+    if (i === 1 || i === 2 || i === total.value || i === total.value - 1 || Math.abs(i - page.value) <= 1) {
+      items.push(i)
+      dotsShown = false
+    } else {
+      if (!dotsShown) {
+        items.push('...')
+        dotsShown = true
+      }
+    }
+  }
+
+  return items
+})
 
 </script>
 
@@ -88,9 +107,9 @@ function onPage(pageCurrent) {
               </a>
             </li>
 
-            <li class="page-item" v-for="i in total" :key="i">
-              <a @click="onPage(i)" class="page-link text-dark"  v-if="i >= 3 && i < total">...</a>
-              <a @click="onPage(i)" :class="{ 'bg-secondary': page === i }" v-else class="page-link text-dark" >{{i}}</a>
+            <li class="page-item" v-for="(i, index) in paginationItems" :key="index">
+              <span v-if="i === '...'" class="page-link text-dark">...</span>
+              <a v-else @click="onPage(i)" :class="{ 'bg-secondary': page === i }" class="page-link text-dark">{{ i }}</a>
             </li>
 
             <li class="page-item">
