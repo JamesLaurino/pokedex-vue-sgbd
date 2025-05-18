@@ -33,7 +33,7 @@ const routes = [
     },
     {
         path: '/pokemon/admin',
-        component : () => import("../pages/AdminPage.vue"),
+        component : () => import("../pages/AdminPageTest.vue"),
         meta: {requiresAuth: false}
     },
     {

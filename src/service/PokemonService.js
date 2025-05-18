@@ -1,26 +1,27 @@
 export default class PokemonService {
 
-    static async fetchPokemons(isLoading, noMoreData, pokemonList, start, limit){
-    if (isLoading.value || noMoreData.value) return
+    static async fetchPokemons(isLoading, noMoreData, pokemonList, start, limit)
+    {
+        if (isLoading.value || noMoreData.value) return
 
-    isLoading.value = true
-    try {
-    const end = start.value + limit
-    const dataApi = await fetch(`${import.meta.env.VITE_API_URL}/pokemons?_start=${start.value}&_end=${end}`)
-    const response = await dataApi.json();
+        isLoading.value = true
+        try {
+        const end = start.value + limit
+        const dataApi = await fetch(`${import.meta.env.VITE_API_URL}/pokemons?_start=${start.value}&_end=${end}`)
+        const response = await dataApi.json();
 
-    if (response.length === 0) {
-    noMoreData.value = true
-} else {
-    pokemonList.value.push(...response)
-    start.value = end
-}
-} catch (error) {
-    console.error('Erreur de chargement :', error)
-} finally {
-    isLoading.value = false
-}
-}
+        if (response.length === 0) {
+        noMoreData.value = true
+        } else {
+            pokemonList.value.push(...response)
+            start.value = end
+        }
+        } catch (error) {
+            console.error('Erreur de chargement :', error)
+        } finally {
+            isLoading.value = false
+        }
+    }
 
     static async fetchPokemonPagination(isLoading, noMoreData, pokemonList, start, end) {
 
@@ -119,6 +120,7 @@ export default class PokemonService {
     static isEmpty(Object) {
         return Object.keys(data).length === 0;
     }
+
     static handleError(error){
         console.log(error);
     }
