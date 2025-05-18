@@ -12,7 +12,7 @@ const { t } = useI18n();
 async function deletePokemon() {
   try {
       const res = {data:''}
-      res.data = await PokemonService.deletePokemonById(props.id).then(data => {data.value})
+      res.data = await PokemonService.deletePokemonById(props.id);
       window.alert(res.data.message);
       location.reload();
   }
