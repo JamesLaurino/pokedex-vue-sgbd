@@ -7,26 +7,23 @@ import { useI18n } from 'vue-i18n';
 import BaseButton from "./shares/BaseButton.vue";
 const { t } = useI18n();
 
-const user = ref(null);
+//const user = ref('');
 const userInput = ref({
   name: '',
   password: "",
 })
 
-const isConnected = ref(false)
 const router = useRouter();
 
 function connexion() {
 
-  UserService.searchUserByEmail(userInput)
+  UserService.login(userInput)
       .then(data => {
-
-        if(data.message === "Mot de passe incorrect.") {
+        if(data.message === "Le mot de passe est incorrect.") {
           window.alert("Une erreur est survenue lors de la connexion");
           router.push({ path: '/login'});
         } else {
-          user.value = data.data;
-          isConnected.value = UserService.isConnected()
+          UserService.setToken(data.token)
           window.alert("Connection effectuée avec success !")
           router.push({ path: '/pokemons'});
         }

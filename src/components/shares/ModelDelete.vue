@@ -9,15 +9,18 @@ const { t } = useI18n();
     id: String
   })
 
-  function deletePokemon() {
-    try {
-        PokemonService.deletePokemonById(props.id).then(data => {data.value})
-        location.reload();
-    }
-    catch (e) {
-      console.log("erreur");
-    }
+async function deletePokemon() {
+  try {
+      const res = {data:''}
+      res.data = await PokemonService.deletePokemonById(props.id).then(data => {data.value})
+      window.alert(res.data.message);
+      location.reload();
   }
+  catch (e) {
+    console.log(e);
+    window.alert("Une erreur est survenue lors de la suppression du pokemon : ");
+  }
+}
 
 </script>
 

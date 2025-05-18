@@ -59,7 +59,8 @@ export default class PokemonService {
         return fetch(`${import.meta.env.VITE_API_URL}/pokemons/${id}`,{
           method: 'DELETE',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
           }
         })
             .then(response => response.json())
@@ -70,7 +71,10 @@ export default class PokemonService {
         return fetch(`${import.meta.env.VITE_API_URL}/pokemons/${pokemon.id}`, {
             method: 'PUT',
             body: JSON.stringify(pokemon),
-            headers: { 'Content-Type': 'application/json' }
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
         })
             .then(response => response.json())
             .catch(error => this.handleError(error));
@@ -81,7 +85,10 @@ export default class PokemonService {
         return fetch(`${import.meta.env.VITE_API_URL}/pokemons`, {
             method: 'POST',
             body: JSON.stringify(pokemon),
-            headers: { 'Content-Type': 'application/json'}
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
         })
             .then(response => response.json())
             .catch(error => this.handleError(error));

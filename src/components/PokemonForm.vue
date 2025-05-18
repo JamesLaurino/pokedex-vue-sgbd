@@ -30,7 +30,7 @@ const error = ref({
 })
 const router = useRouter();
 
-function submitPokemon() {
+async function submitPokemon() {
 
   Object.keys(error.value).forEach(key => {
     error.value[key] = false
@@ -46,15 +46,17 @@ function submitPokemon() {
 
     const hasError = Object.values(error.value).some(val => val === true);
     if(!hasError) {
+      let res = {data:''}
       if(isEdit) {
         pokemon.type = pokemon.type.join(",");
-        PokemonService.updatePokemon(pokemon);
+        res.data = await PokemonService.updatePokemon(pokemon);
       }
       else {
         pokemon.type = pokemon.type.join(",");
-        PokemonService.addPokemon(pokemon);
+        res.data = await PokemonService.addPokemon(pokemon);
       }
-      window.alert("Opération effectuée avec succés");
+
+      window.alert(res.data.message);
       router.push({ path: '/pokemons'});
     }
   }

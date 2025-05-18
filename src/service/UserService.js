@@ -1,8 +1,6 @@
 export default class UserService {
 
-    static isUserConnected = false;
-
-    static searchUserByEmail(user) {
+    static login(user) {
         return fetch(`${import.meta.env.VITE_API_URL}/client`, {
             method: 'POST',
             body: JSON.stringify(user.value),
@@ -12,9 +10,8 @@ export default class UserService {
             .catch(error => this.handleError(error));
     }
 
-    static isConnected() {
-        localStorage.setItem('token','bearer1234')
-        return UserService.isUserConnected
+    static setToken(token) {
+        localStorage.setItem('token',token)
     }
 
     static isEmpty(Object) {
