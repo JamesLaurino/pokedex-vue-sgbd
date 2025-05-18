@@ -11,14 +11,12 @@ const route = useRoute();
 const pokemonId = route.params.id;
 const pokemon = ref(null);
 const types = ref([]);
-const colorType = ref('')
 
 onMounted(() => {
   PokemonService.getPokemonById(pokemonId)
       .then(data => {
         pokemon.value = data
         types.value = pokemon.value.type.split(",")
-        colorType.value = TypeColorHelper(types.value[0])
       });
 });
 </script>
@@ -35,22 +33,8 @@ onMounted(() => {
           </div>
       </div>
       <div class="list-group">
-        <a class="list-group-item list-group-item-action">
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped" role="progressbar"
-                 :style="{ 'width': pokemon.hp + '%',backgroundColor: colorType  }" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                {{pokemon.hp}} HP
-            </div>
-          </div>
-        </a>
-        <a class="list-group-item list-group-item-action list-group-item">
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped" role="progressbar"
-                 :style="{ 'width': pokemon.cp + '%',backgroundColor: colorType }" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-              {{pokemon.cp}} CP
-            </div>
-          </div>
-        </a>
+        <a class="list-group-item list-group-item-action">HP : {{pokemon.hp}}</a>
+        <a class="list-group-item list-group-item-action list-group-item-secondary">CP : {{pokemon.cp}}</a>
         <a class="list-group-item list-group-item-action mt-2">
           <span class="text-dark font-weight-bold rounded-circle mr-3 p-2" :style="{ backgroundColor: TypeColorHelper(type) }" v-for="(type,index) in types" :key="index">
             {{type}}
